@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from "react-redux";
+import { push } from "connected-react-router";
 import styled from "styled-components";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import {
@@ -32,6 +33,13 @@ const LogginButton = styled(Button)`
   padding: 0 20px;
 `;
 
+const ErrorLabel = styled.div`
+  padding: 8px 15px;
+  margin-bottom: 16px;
+  background-color: #fff1f0;
+  border: 1px solid #ffa39e;
+`
+
 function LoginPage() {
   // const { register, handleSubmit, watch, errors } = useForm()
   const dispatch = useDispatch();
@@ -42,12 +50,17 @@ function LoginPage() {
   const onEnterEmail = e => dispatch(enterEmailAction(e.target.value));
   const onEnterPassword = e => dispatch(enterPasswordAction(e.target.value));
 
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const email = useSelector(state => state.auth.email);
   const password = useSelector(state => state.auth.password);
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
 
-  console.log('loading: ' + loading)
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(push('/cms'))
+    }
+  }, [dispatch, isAuthenticated])
 
   return (
     <Container>
@@ -77,7 +90,7 @@ function LoginPage() {
                 onChange={onEnterPassword}
               />
             </FormGroup>
-            <div>{error ? <span>{error}</span> : ""}</div>
+            <div>{error ? <ErrorLabel>{error}</ErrorLabel> : ""}</div>
             <LogginButton type="submit" color="primary" disabled={loading}>
               Login
             </LogginButton>

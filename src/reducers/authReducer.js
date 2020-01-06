@@ -4,7 +4,11 @@ import {
   LOGIN_ERROR,
   LOGIN_SUCCESS,
   ENTER_EMAIL,
-  ENTER_PASSWORD
+  ENTER_PASSWORD,
+  IS_LOGGED,
+  LOGOUT,
+  LOGOUT_SUCCESS,
+  LOGOUT_ERROR
 } from "../constants/types";
 
 const initialState = {
@@ -29,12 +33,27 @@ const authReducer = produce((draft, action) => {
       draft.loading = true;
       break;
     case LOGIN_SUCCESS:
+      draft.email = '';
+      draft.password = '';
       draft.loading = false;
       draft.isAuthenticated = true;
       break;
     case LOGIN_ERROR:
       draft.loading = false;
       draft.error = action.error;
+      break;
+    case IS_LOGGED:
+      draft.isAuthenticated = true;
+      break;
+    case LOGOUT:
+      draft.loading = true;
+      break;
+    case LOGOUT_SUCCESS:
+      draft.isAuthenticated = false;
+      draft.loading = false;
+      break;
+    case LOGOUT_ERROR:
+      draft.loading = false;
       break;
   }
 }, initialState);

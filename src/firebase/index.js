@@ -19,9 +19,11 @@ const firebase = app.initializeApp(config);
 const auth = app.auth();
 
 export const doSignInWithEmailAndPassword = (email, password) => auth.signInWithEmailAndPassword(email, password);
-export const onAuthUserListener = () => auth.onAuthStateChanged();
+export const onAuthUserListener = () => auth.onAuthStateChanged(user => user);
+export const doLogout = () => auth.signOut();
 
-export default firebase;
+export default auth;
+// export default { firebase };
 
 // class Firebase {
 //   constructor() {
