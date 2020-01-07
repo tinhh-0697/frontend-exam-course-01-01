@@ -8,7 +8,7 @@ import {
   loginAction,
   enterEmailAction,
   enterPasswordAction
-} from "../../actions/authActions";
+} from "actions/authActions";
 
 const WrapLogin = styled.div`
   width: 420px;

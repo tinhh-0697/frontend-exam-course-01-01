@@ -15,7 +15,7 @@ const config = {
   appId: "1:45152271471:web:80fbece03fa07edee6619a"
 };
 
-const firebase = app.initializeApp(config);
+app.initializeApp(config);
 const auth = app.auth();
 
 export const doSignInWithEmailAndPassword = (email, password) => auth.signInWithEmailAndPassword(email, password);

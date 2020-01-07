@@ -9,6 +9,7 @@ function App() {
   return (
     <Switch>
       <Route path="/login" component={LoginPage} />
+      
       <PrivateRoute path="/cms" component={ManagementPage} />
       <Route path="*">
         <NotFound />

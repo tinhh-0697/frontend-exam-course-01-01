@@ -7,12 +7,17 @@ const LogoWrap = styled.div`
   color: #fff;
 `;
 
-const Logo = styled.div``;
+const Logo = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 function LogoC() {
   return (
     <LogoWrap>
-      <Logo>#logo</Logo>
+      <Logo><img style={{ width: '150px'}} src={require('assets/logo')} alt=''/></Logo>
     </LogoWrap>
   );
 }

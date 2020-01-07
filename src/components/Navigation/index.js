@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import SubMenu from "../Menu/SubMenu";
+import { Badge } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTachometerAlt,
@@ -13,10 +14,16 @@ import {
 
 const Menu = styled.div``;
 
+const MenuItemIcon = styled.div`
+  width: 30px;
+  font-size: 23px;
+`;
+
 const MenuItem = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
-  padding: 12px 35px;
+  padding: ${props => props.active ? '12px 0' : '12px 35px'};
   font-size: 18px;
   color: ${props => props.active ? '#38C6DA' : '#757d89'};
   margin: 0;
@@ -27,9 +34,16 @@ const MenuItem = styled.div`
   }
 
   &:before {
+    position: absolute;
     content: '';
     width: 4px;
+    height: ${props => props.active ? '100%' : 0};
     background-color: #38C6DA;
+  }
+
+  ${MenuItemIcon} {
+    color: ${props => props.active ? '#38C6DA' : '#D5D8DB'};
+    margin-left: ${props => props.active ? '35px' : 0};
   }
 `;
 
@@ -37,10 +51,15 @@ const MenuItemSpan = styled.div`
   margin-left: 26px;
 `;
 
-const MenuItemIcon = styled.div`
-  width: 30px;
-  font-size: 23px;
-  color: #D5D8DB;
+const QualityBadge = styled(Badge)`
+  && {
+    position: absolute;
+    right: 0;
+    background-color: #38C6DA;
+    padding: 7px 20px;
+    margin-right: 31px;
+    border-radius: 999px;
+  }
 `;
 
 function Navigation() {
@@ -51,8 +70,9 @@ function Navigation() {
           <MenuItem>
             <MenuItemIcon><FontAwesomeIcon icon={faTachometerAlt} /></MenuItemIcon>
             <MenuItemSpan>Dashboard</MenuItemSpan>
+            <QualityBadge>2</QualityBadge>
           </MenuItem>
-          <MenuItem active>
+          <MenuItem>
             <MenuItemIcon><FontAwesomeIcon icon={faHome} /></MenuItemIcon>
             <MenuItemSpan>Home</MenuItemSpan>
           </MenuItem>
@@ -60,7 +80,7 @@ function Navigation() {
             <MenuItemIcon><FontAwesomeIcon icon={faPuzzlePiece} /></MenuItemIcon>
             <MenuItemSpan>Widgets</MenuItemSpan>
           </MenuItem>
-          <MenuItem>
+          <MenuItem active>
             <MenuItemIcon><FontAwesomeIcon icon={faTh} /></MenuItemIcon>
             <MenuItemSpan>Articles</MenuItemSpan>
           </MenuItem>

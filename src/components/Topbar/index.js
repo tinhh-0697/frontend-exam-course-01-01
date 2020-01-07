@@ -1,10 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
+import styled from "styled-components";
 import {
-  faSearch,
-  faCog
-} from "@fortawesome/free-solid-svg-icons";
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faCog } from "@fortawesome/free-solid-svg-icons";
 
 const TopbarWrap = styled.div`
   display: flex;
@@ -22,13 +25,16 @@ const Search = styled.div`
 
 const SearchIcon = styled.div`
   margin-right: 28px;
-  color: #B8B8B8;
+  color: #b8b8b8;
+  font-size: 24px;
+  font-weight: 3;
 `;
 
 const SearchInput = styled.input`
-  border: none;
+  color: #b5b5b5;
   font-size: 18px;
-  color: #B5B5B5;
+  font-weight: 300;
+  border: none;
 `;
 
 const Account = styled.div`
@@ -39,35 +45,38 @@ const Account = styled.div`
 const AccountName = styled.div`
   margin-right: 19px;
   font-size: 20px;
-  color: #5A5A5A;
+  color: #5a5a5a;
 `;
 
-const AccountSetting = styled.span`
+const CogButton = styled.button`
   font-size: 30px;
-  color: #D5D8DB;
+  color: #d5d8db;
 `;
-
-const Option = styled.div``;
-
-const OptionIcon = styled.div``;
 
 function Topbar() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen(prevState => !prevState);
+
   return (
     <TopbarWrap>
-    <Search>
-      <SearchIcon><FontAwesomeIcon icon={faSearch} /></SearchIcon>
-      <SearchInput placeholder='Search now ...'/>
-    </Search>
-    <Account>
-      <AccountName>Katie Reed</AccountName>
-      <AccountSetting><FontAwesomeIcon icon={faCog} /></AccountSetting>
-      {/* <Option>
-        <OptionIcon />
-        #option
-      </Option> */}
-    </Account>
-  </TopbarWrap>
-  )
+      <Search>
+        <SearchIcon>
+          <FontAwesomeIcon icon={faSearch} />
+        </SearchIcon>
+        <SearchInput placeholder="Search now ..." />
+      </Search>
+      <Account>
+        <AccountName>Katie Reed</AccountName>
+        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+          <DropdownToggle><FontAwesomeIcon icon={faCog} /></DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem>Logout</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </Account>
+    </TopbarWrap>
+  );
 }
 
 export default Topbar;

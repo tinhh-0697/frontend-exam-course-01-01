@@ -9,7 +9,7 @@ import {
   LOGOUT,
   LOGOUT_SUCCESS,
   LOGOUT_ERROR
-} from "../constants/types";
+} from "constants/types";
 
 const initialState = {
   isAuthenticated: false,

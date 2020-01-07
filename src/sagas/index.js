@@ -2,7 +2,7 @@ import { doSignInWithEmailAndPassword, doLogout } from "./../firebase";
 import { push } from "connected-react-router";
 import { all, put, takeLatest } from "redux-saga/effects";
 import { LOGIN, LOGOUT } from "../constants/types";
-import { loginErrorAction, logOutSuccessAction } from "../actions/authActions";
+import { loginErrorAction, logOutSuccessAction } from "actions/authActions";
 
 function* handleLogin(payload) {
   const { email, password } = payload.user;
