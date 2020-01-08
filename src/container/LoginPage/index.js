@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import styled from "styled-components";
@@ -41,7 +40,6 @@ const ErrorLabel = styled.div`
 `
 
 function LoginPage() {
-  // const { register, handleSubmit, watch, errors } = useForm()
   const dispatch = useDispatch();
   const onSubmit = e => {
     e.preventDefault();

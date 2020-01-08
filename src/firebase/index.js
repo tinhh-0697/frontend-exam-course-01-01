@@ -17,10 +17,13 @@ const config = {
 
 app.initializeApp(config);
 const auth = app.auth();
+const database = app.database();
 
 export const doSignInWithEmailAndPassword = (email, password) => auth.signInWithEmailAndPassword(email, password);
 export const onAuthUserListener = () => auth.onAuthStateChanged(user => user);
 export const doLogout = () => auth.signOut();
+export const getArticles = () => database.ref('/articles').once('value').then(snapshot => snapshot.val());
+export const addArticle = (article) => database.ref('/articles').push(article);
 
 export default auth;
 // export default { firebase };

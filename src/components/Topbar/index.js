@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import {
-  Dropdown,
+  Button,
+  ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCog } from "@fortawesome/free-solid-svg-icons";
+
+import { logOutAction } from "actions/authActions";
 
 const TopbarWrap = styled.div`
   display: flex;
@@ -35,6 +39,7 @@ const SearchInput = styled.input`
   font-size: 18px;
   font-weight: 300;
   border: none;
+  outline: none;
 `;
 
 const Account = styled.div`
@@ -48,12 +53,47 @@ const AccountName = styled.div`
   color: #5a5a5a;
 `;
 
-const CogButton = styled.button`
-  font-size: 30px;
-  color: #d5d8db;
+const CogButton = styled(DropdownToggle)`
+  && {
+    background: none;
+    font-size: 30px;
+    color: #d5d8db;
+    border: none;
+
+    &:hover {
+      background: none;
+      color: #d5d8db;
+    }
+
+    &:focus {
+      background: none;
+      color: #d5d8db;
+      box-shadow: none;
+    }
+
+    &:active {
+      background: none;
+    }
+  }
+`;
+
+const LogoutButton = styled(Button)`
+  && {
+    background: none;
+    border: none;
+    color: #A0A0A0;
+
+    &:hover {
+      background: none;
+      color: #D4D4D4;
+    }
+  }
 `;
 
 function Topbar() {
+  const dispatch = useDispatch();
+  const onLogout = () => dispatch(logOutAction());
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
@@ -68,12 +108,16 @@ function Topbar() {
       </Search>
       <Account>
         <AccountName>Katie Reed</AccountName>
-        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-          <DropdownToggle><FontAwesomeIcon icon={faCog} /></DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem>Logout</DropdownItem>
+        <ButtonDropdown isOpen={dropdownOpen} toggle={toggle} tag="div">
+          <CogButton>
+            <FontAwesomeIcon icon={faCog} />
+          </CogButton>
+          <DropdownMenu right>
+            <DropdownItem>
+              <LogoutButton onClick={onLogout}>Logout</LogoutButton>
+            </DropdownItem>
           </DropdownMenu>
-        </Dropdown>
+        </ButtonDropdown>
       </Account>
     </TopbarWrap>
   );

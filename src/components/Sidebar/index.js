@@ -4,7 +4,7 @@ import Navigation from "components/Navigation";
 import Logo from "components/Logo";
 
 const SidebarWrap = styled.div`
-  width: 350px;
+  min-width: 350px;
   background: #fff;
 `;
 
