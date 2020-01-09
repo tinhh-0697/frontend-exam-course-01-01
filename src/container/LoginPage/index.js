@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import styled from "styled-components";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
+
 import {
   loginAction,
   enterEmailAction,
@@ -37,12 +39,12 @@ const ErrorLabel = styled.div`
   margin-bottom: 16px;
   background-color: #fff1f0;
   border: 1px solid #ffa39e;
-`
+`;
 
 function LoginPage() {
+  const { handleSubmit, register, errors } = useForm();
   const dispatch = useDispatch();
   const onSubmit = e => {
-    e.preventDefault();
     dispatch(loginAction({ email, password }));
   };
   const onEnterEmail = e => dispatch(enterEmailAction(e.target.value));
@@ -56,26 +58,33 @@ function LoginPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(push('/cms'))
+      dispatch(push("/cms"));
     }
-  }, [dispatch, isAuthenticated])
+  }, [dispatch, isAuthenticated]);
 
   return (
     <Container>
       <WrapLogin>
         <FormWrap>
           <Title>Login</Title>
-          <Form onSubmit={onSubmit}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
               <Label>Email</Label>
               <Input
-                type="email"
                 name="email"
                 id="email"
                 placeholder="Enter your email"
                 defaultValue={email}
                 onChange={onEnterEmail}
+                innerRef={register({
+                  required: 'Please enter your email',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    message: "Invalid email address"
+                  }
+                })}
               />
+              {errors.email && <ErrorLabel>{errors.email.message}</ErrorLabel>}
             </FormGroup>
             <FormGroup>
               <Label>Password</Label>
@@ -86,7 +95,15 @@ function LoginPage() {
                 placeholder="Enter your password"
                 defaultValue={password}
                 onChange={onEnterPassword}
+                innerRef={register({
+                  required: 'Please enter your password',
+                  minLength: {
+                    value: 6,
+                    message: "At least 6 characters"
+                  }
+                })}
               />
+              {errors.password && <ErrorLabel>{errors.password.message}</ErrorLabel>}
             </FormGroup>
             <div>{error ? <ErrorLabel>{error}</ErrorLabel> : ""}</div>
             <LogginButton type="submit" color="primary" disabled={loading}>

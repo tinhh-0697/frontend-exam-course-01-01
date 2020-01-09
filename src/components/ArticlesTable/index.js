@@ -7,7 +7,7 @@ import { Table, Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { getArticlesAction } from "actions/articleActions";
-import { openFormAction } from "../../actions/articleActions";
+import { openFormAction, deleteArticleAction } from "../../actions/articleActions";
 import ArticleEditModal from "../ArticleEditModal";
 
 const AddButton = styled(Button)`
@@ -109,20 +109,24 @@ const DeleteButton = styled(EditButton)`
 function truncate(title) {
   if (title.length > 50) {
     let truncated = title.substring(0, 45);
-    truncated = truncated.substring(0, Math.min(truncated.length, truncated.lastIndexOf(" ")))  + "...";
+    truncated =
+      truncated.substring(
+        0,
+        Math.min(truncated.length, truncated.lastIndexOf(" "))
+      ) + "...";
     return truncated;
   }
   return title;
-
 }
 
 function ArticlesTable() {
   const dispatch = useDispatch();
+  const onOpenForm = (key) => dispatch(openFormAction(key));
   const onGetArticles = () => dispatch(getArticlesAction());
-  const onOpenForm = () => dispatch(openFormAction());
+  const onDeleteArticle = (key) => dispatch(deleteArticleAction(key));
 
   const articles = useSelector(state => state.articles.data);
-  const isOpenForm = useSelector(state =>state.articles.isOpenForm);
+  const isOpenForm = useSelector(state => state.articles.isOpenForm);
 
   useEffect(() => {
     onGetArticles();
@@ -130,26 +134,27 @@ function ArticlesTable() {
 
   function renderArticles(articles) {
     if (articles) {
-        console.log(Object.keys(articles))
-        console.log(articles['-Ly3XTY2wxY9Kxq7Ejye']);
-        let no = 1;
-        return _.map(articles, (article, index) => {
-          if (article !== undefined)
-            return (
-              <tr key={index}>
-                <td>{no++}</td>
-                <td>{truncate(article.title)}</td>
-                <td>2,567</td>
-                <td>
-                  <FontAwesomeIcon style={{ color: article.status ? '#38C6DA' : '#CFD3D8'}} icon={faCheck} />
-                </td>
-                <td>
-                  <EditButton>Edit</EditButton>
-                  <DeleteButton>Delete</DeleteButton>
-                </td>
-              </tr>
-            );
-        });
+      let no = 1;
+      return _.map(articles, (article, key) => {
+        if (article !== undefined)
+          return (
+            <tr key={key}>
+              <td>{no++}</td>
+              <td>{truncate(article.title)}</td>
+              <td>2,567</td>
+              <td>
+                <FontAwesomeIcon
+                  style={{ color: article.status ? "#38C6DA" : "#CFD3D8" }}
+                  icon={faCheck}
+                />
+              </td>
+              <td>
+                <EditButton onClick={() => onOpenForm(key)}>Edit</EditButton>
+                <DeleteButton onClick={() => onDeleteArticle(key)}>Delete</DeleteButton>
+              </td>
+            </tr>
+          );
+      });
     }
   }
 
@@ -157,9 +162,9 @@ function ArticlesTable() {
     <TableWrap>
       <TableHead>
         <TableTitle>Articles</TableTitle>
-        <AddButton onClick={onOpenForm}>
+        <AddButton onClick={() => onOpenForm()}>
           <AddButtonText>Add new</AddButtonText>
-          <ArticleEditModal visible={isOpenForm}/>
+          <ArticleEditModal visible={isOpenForm} />
           <AddButtonIcon>
             <FontAwesomeIcon icon={faPlus} />
           </AddButtonIcon>
@@ -179,7 +184,7 @@ function ArticlesTable() {
           <tbody>{renderArticles(articles)}</tbody>
         </CustomeTable>
       </TableContent>
-      <ArticleEditModal visible={isOpenForm}/>
+      <ArticleEditModal visible={isOpenForm} />
     </TableWrap>
   );
 }

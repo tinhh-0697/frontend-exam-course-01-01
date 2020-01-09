@@ -9,7 +9,6 @@ const SidebarWrap = styled.div`
 `;
 
 function Sidebar() {
-
   return (
       <SidebarWrap>
         <Logo />

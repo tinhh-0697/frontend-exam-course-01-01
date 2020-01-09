@@ -1,11 +1,31 @@
-import { GET_ARTICLES, GET_ARTICLES_SUCCESS, GET_ARTICLES_ERROR, OPEN_FORM, CLOSE_FORM, ADD_ARTICLE, ADD_ARTICLE_SUCCESS, ADD_ARTICLE_ERROR, ENTER_TITLE, CHANGE_STATUS } from "../constants/types"
+import {
+  GET_ARTICLES,
+  GET_ARTICLES_SUCCESS,
+  GET_ARTICLES_ERROR,
+  OPEN_FORM,
+  CLOSE_FORM,
+  ADD_ARTICLE,
+  ADD_ARTICLE_SUCCESS,
+  ADD_ARTICLE_ERROR,
+  ENTER_TITLE,
+  CHANGE_STATUS,
+  DELETE_ARTICLE,
+  DELETE_ARTICLE_SUCCESS,
+  DELETE_ARTICLE_ERROR,
+  UPDATE_ARTICLE,
+  UPDATE_ARTICLE_SUCCESS,
+  UPDATE_ARTICLE_ERROR
+} from "../constants/types"
 
 /**
  * Article Actions
  */
-export const openFormAction = () => {
+
+// Form actions
+export const openFormAction = (key) => {
   return {
-    type: OPEN_FORM
+    type: OPEN_FORM,
+    key
   }
 }
 
@@ -15,6 +35,7 @@ export const closeFormAction = () => {
   }
 }
 
+// Get articles actions
 export const getArticlesAction = () => {
   return {
     type: GET_ARTICLES
@@ -35,16 +56,17 @@ export const getArticlesErrorAction = (error) => {
   }
 }
 
+// Add articles actions
 export const addArticleAction = () => {
   return {
     type: ADD_ARTICLE
   }
 }
 
-export const addArticleSuccessAction = (article) => {
+export const addArticleSuccessAction = (articleObj) => {
   return {
     type: ADD_ARTICLE_SUCCESS,
-    article
+    articleObj
   }
 }
 
@@ -55,6 +77,7 @@ export const addArticleErrorAction = (error) => {
   }
 }
 
+// Enter article actions
 export const enterTitleAction = (title) => {
   return {
     type: ENTER_TITLE,
@@ -66,5 +89,49 @@ export const changeStatusAction = (status) => {
   return {
     type: CHANGE_STATUS,
     status
+  }
+}
+
+// Delete article actions
+export const deleteArticleAction = (key) => {
+  return {
+    type: DELETE_ARTICLE,
+    key
+  }
+}
+
+export const deleteArticleSuccessAction = (key) => {
+  return {
+    type: DELETE_ARTICLE_SUCCESS,
+    key
+  }
+}
+
+export const deleteArticleErrorAction = (error) => {
+  return {
+    type: DELETE_ARTICLE_ERROR,
+    error
+  }
+}
+
+// Update article actions
+export const updateArticleAction = (key) => {
+  return {
+    type: UPDATE_ARTICLE,
+    key
+  }
+}
+
+export const updateArticleSuccessAction = (articleObj) => {
+  return {
+    type: UPDATE_ARTICLE_SUCCESS,
+    articleObj
+  }
+}
+
+export const updateArticleErrorAction = (error) => {
+  return {
+    type: UPDATE_ARTICLE_ERROR,
+    error
   }
 }

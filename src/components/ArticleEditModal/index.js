@@ -1,44 +1,82 @@
 import React from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormFeedback} from "reactstrap";
-import { addArticleAction, closeFormAction, enterTitleAction, changeStatusAction } from "../../actions/articleActions";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Form,
+  FormGroup,
+  Label,
+  Input
+} from "reactstrap";
+import {
+  addArticleAction,
+  closeFormAction,
+  enterTitleAction,
+  changeStatusAction,
+  updateArticleAction
+} from "../../actions/articleActions";
 
 function ArticleEditModal({ visible }) {
+  const { handleSubmit, register, errors } = useForm();
   const dispatch = useDispatch();
-  const onAddArticle = () => dispatch(addArticleAction());
-  const onCloseForm = () => dispatch(closeFormAction());
-  const onChangeTitle = (e) => dispatch(enterTitleAction(e.target.value));
-  const onChangeStatus = (e) => dispatch(changeStatusAction(e.target.checked));
 
-  const title = useSelector(state => state.articles.article.title)
-  const status = useSelector(state => state.articles.article.status)
+  const onAddArticle = () => dispatch(addArticleAction());
+  const onUpdateArticle = () => dispatch(updateArticleAction());
+  const onCloseForm = () => dispatch(closeFormAction());
+  const onChangeTitle = e => dispatch(enterTitleAction(e.target.value));
+  const onChangeStatus = e => dispatch(changeStatusAction(e.target.checked));
+
+  const key = useSelector(state => state.articles.article.key);
+  const title = useSelector(state => state.articles.article.title);
+  const status = useSelector(state => state.articles.article.status);
 
   return (
     <>
       <Modal isOpen={visible}>
-        <ModalHeader>Add new article</ModalHeader>
+        <ModalHeader>{key ? "Update article" : "Add new article"}</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label for="exampleEmail">Title</Label>
+              <Label>Title</Label>
               <Input
                 type="text"
                 name="title"
                 placeholder="Enter article title"
-                value={title}
+                defaultValue={title}
                 onChange={onChangeTitle}
+                innerRef={register({
+                  required: 'Please enter article title',
+                  minLength: {
+                    value: 10,
+                    message: "At least 10 characters"
+                  }
+                })}
               />
+              {errors.title && errors.title.message}
             </FormGroup>
             <FormGroup check>
               <Label check>
-                <Input type="checkbox" onChange={onChangeStatus}/> Status
+                <Input
+                  type="checkbox"
+                  onChange={onChangeStatus}
+                  checked={status}
+                />{" "}
+                Status
               </Label>
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={onAddArticle}>Add</Button>{" "}
-          <Button color="secondary" onClick={onCloseForm}>Cancel</Button>
+          <Button color="primary" onClick={key ? handleSubmit(onUpdateArticle) : handleSubmit(onAddArticle)}>
+            {key ? 'Update' : 'Add'}
+          </Button>
+          <Button color="secondary" onClick={onCloseForm}>
+            Cancel
+          </Button>
         </ModalFooter>
       </Modal>
     </>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from 'react-router-dom';
 import SubMenu from "../Menu/SubMenu";
 import { Badge } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +20,7 @@ const MenuItemIcon = styled.div`
   font-size: 23px;
 `;
 
-const MenuItem = styled.div`
+const MenuItem = styled(NavLink)`
   position: relative;
   display: flex;
   align-items: center;
@@ -67,7 +68,7 @@ function Navigation() {
     <>
       <Menu>
         <SubMenu title="Category 1">
-          <MenuItem>
+          <MenuItem key='/cms'>
             <MenuItemIcon><FontAwesomeIcon icon={faTachometerAlt} /></MenuItemIcon>
             <MenuItemSpan>Dashboard</MenuItemSpan>
             <QualityBadge>2</QualityBadge>
@@ -80,7 +81,7 @@ function Navigation() {
             <MenuItemIcon><FontAwesomeIcon icon={faPuzzlePiece} /></MenuItemIcon>
             <MenuItemSpan>Widgets</MenuItemSpan>
           </MenuItem>
-          <MenuItem active>
+          <MenuItem>
             <MenuItemIcon><FontAwesomeIcon icon={faTh} /></MenuItemIcon>
             <MenuItemSpan>Articles</MenuItemSpan>
           </MenuItem>

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import {
   Button,
-  ButtonDropdown,
+  Dropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem
@@ -108,16 +108,16 @@ function Topbar() {
       </Search>
       <Account>
         <AccountName>Katie Reed</AccountName>
-        <ButtonDropdown isOpen={dropdownOpen} toggle={toggle} tag="div">
+        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <CogButton>
             <FontAwesomeIcon icon={faCog} />
           </CogButton>
           <DropdownMenu right>
             <DropdownItem>
-              <LogoutButton onClick={onLogout}>Logout</LogoutButton>
+              <LogoutButton onClick={onLogout} tag="a">Logout</LogoutButton>
             </DropdownItem>
           </DropdownMenu>
-        </ButtonDropdown>
+        </Dropdown>
       </Account>
     </TopbarWrap>
   );

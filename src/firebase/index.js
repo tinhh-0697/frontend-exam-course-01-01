@@ -24,6 +24,8 @@ export const onAuthUserListener = () => auth.onAuthStateChanged(user => user);
 export const doLogout = () => auth.signOut();
 export const getArticles = () => database.ref('/articles').once('value').then(snapshot => snapshot.val());
 export const addArticle = (article) => database.ref('/articles').push(article);
+export const deleteArticle = (key) => database.ref(`/articles/${key}`).set({});
+export const updateArticle = (articleObj) => database.ref(`/articles/${articleObj.key}`).update(articleObj.article);
 
 export default auth;
 // export default { firebase };
