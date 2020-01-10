@@ -5,7 +5,7 @@ import Sidebar from "components/Sidebar";
 
 const Container = styled.div`
   display: flex;
-  background-color: #f1f3f5;
+  background-color: ${props => props.theme.colors.background};
   height: 100vh;
 `;
 

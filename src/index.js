@@ -1,6 +1,5 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { ThemeProvider } from "styled-components";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { ConnectedRouter } from "connected-react-router";
@@ -13,7 +12,6 @@ import 'sanitize.css/typography.css';
 
 import auth from "./firebase";
 import { loginSuccessAction, logOutSuccessAction } from "./actions/authActions";
-import lightTheme from "./themes/light";
 
 const initialState = {};
 export const store = configureStore(initialState);
@@ -29,9 +27,7 @@ auth.onAuthStateChanged(user => {
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <ThemeProvider theme={lightTheme}>
         <App />
-      </ThemeProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")

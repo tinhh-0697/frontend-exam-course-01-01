@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCog } from "@fortawesome/free-solid-svg-icons";
 
 import { logOutAction } from "actions/authActions";
+import { toggleThemeAction } from "actions/themeActions";
 
 const TopbarWrap = styled.div`
   display: flex;
@@ -90,9 +91,14 @@ const LogoutButton = styled(Button)`
   }
 `;
 
+const ToggleTheme = styled(Button)`
+
+`;
+
 function Topbar() {
   const dispatch = useDispatch();
   const onLogout = () => dispatch(logOutAction());
+  const onToggleTheme = () => dispatch(toggleThemeAction());
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -115,6 +121,9 @@ function Topbar() {
           <DropdownMenu right>
             <DropdownItem>
               <LogoutButton onClick={onLogout} tag="a">Logout</LogoutButton>
+            </DropdownItem>
+            <DropdownItem>
+              <ToggleTheme onClick={onToggleTheme} tag="a">Switch theme</ToggleTheme>
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>

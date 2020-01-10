@@ -5,7 +5,7 @@ import Logo from "components/Logo";
 
 const SidebarWrap = styled.div`
   min-width: 350px;
-  background: #fff;
+  background: ${props => props.theme.colors.sidebarBackground};
 `;
 
 function Sidebar() {

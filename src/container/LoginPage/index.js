@@ -58,7 +58,7 @@ function LoginPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(push("/cms"));
+      dispatch(push("/articles"));
     }
   }, [dispatch, isAuthenticated]);
 
