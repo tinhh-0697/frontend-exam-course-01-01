@@ -12,7 +12,7 @@ const SubMenuText = styled.div`
   font-size: 18px;
   color: #bcbfc4;
   text-transform: uppercase;
-  border-bottom: 1px solid #eaeced;
+  border-bottom: 1px solid ${props => props.theme.colors.line}
 `;
 
 const MenuItems = styled.ul`

@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Topbar from "components/Topbar/index";
 import Sidebar from "components/Sidebar";
+import { useSelector } from "react-redux";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Container = styled.div`
   display: flex;
@@ -18,6 +20,18 @@ const Content = styled.div`
 `;
 
 function Layout({ children }) {
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
+  if (!isAuthenticated) {
+    return (
+      <ClipLoader
+        // css={override}
+        size={150}
+        color={"#123abc"}
+      />
+    );
+  }
+
   return (
     <Container>
       <Sidebar />

@@ -1,12 +1,12 @@
+import { push } from "connected-react-router";
 import {
   doSignInWithEmailAndPassword,
   doLogout,
   getArticles,
   addArticle,
   deleteArticle,
-  updateArticle
+  updateArticle,
 } from "./../firebase";
-import { push } from "connected-react-router";
 import { all, put, takeLatest, call, select } from "redux-saga/effects";
 import {
   LOGIN,
@@ -14,7 +14,7 @@ import {
   GET_ARTICLES,
   ADD_ARTICLE,
   DELETE_ARTICLE,
-  UPDATE_ARTICLE
+  UPDATE_ARTICLE,
 } from "../constants/types";
 import { loginErrorAction, logOutSuccessAction } from "actions/authActions";
 import {
@@ -32,7 +32,11 @@ function* handleLogin(payload) {
   const { email, password } = payload.user;
 
   try {
-    yield doSignInWithEmailAndPassword(email, password);
+    const response = yield doSignInWithEmailAndPassword(email, password);
+    const userData = {
+      uid: response.user.uid,
+      name: response.user.displayName || "Hello Bro"
+    }
   } catch (error) {
     if (error.code === "auth/wrong-password")
       return yield put(loginErrorAction("Mật khẩu không đúng"));
@@ -85,7 +89,7 @@ function* handleAddArticle() {
 
 function* handleDeleteArticle({ key }) {
   try {
-    const response = yield call(() => deleteArticle(key));
+    yield call(() => deleteArticle(key));
     yield put(deleteArticleSuccessAction(key));
 
   } catch (error) {
@@ -103,8 +107,7 @@ function* handleUpdateArticle() {
       }
     };
 
-    // console.log(articleObj);
-    const response = yield call(() => updateArticle(articleObj));
+    yield call(() => updateArticle(articleObj));
     yield put(updateArticleSuccessAction(articleObj));
 
   } catch (error) {

@@ -37,14 +37,15 @@ const TableHead = styled.div`
 
 const TableTitle = styled.h4`
   font-size: 20px;
-  color: #555;
+  color: ${props => props.theme.colors.tableTitle};
 `;
 
 const TableContent = styled.div``;
 
 const TableWrap = styled.div`
-  background: #fff;
-  border-radius: 8px;
+  background: ${props => props.theme.colors.contentBackground};
+  border-radius: 5px;
+  border: 1px solid ${props => props.theme.colors.line};
 `;
 
 const CustomeTable = styled(Table)`
@@ -52,19 +53,19 @@ const CustomeTable = styled(Table)`
     table-layout: fixed;
 
     thead > tr {
-      border-bottom: 1px solid #eaeced;
+      border-bottom: 1px solid ${props => props.theme.colors.line};
     }
 
     tr {
       &:nth-child(even) {
-        background-color: #f1f3f5;
+        background-color: ${props => props.theme.colors.rowTableBackground};
       }
     }
 
     th {
       padding: 24px 19px;
       font-size: 17px;
-      color: #555;
+      color: ${props => props.theme.colors.tableHead};
       border: none;
 
       &:first-child {
@@ -81,6 +82,15 @@ const CustomeTable = styled(Table)`
       padding: 26px 19px;
       border: none;
       vertical-align: middle;
+      color: ${props => props.theme.colors.articleName};
+
+      &:nth-child(2) {
+        color: ${props => props.theme.colors.articleName};
+      }
+
+      &:nth-child(3) {
+        color: ${props => props.theme.colors.articleView};
+      }
 
       &:nth-child(4) {
         text-align: center;
@@ -164,7 +174,6 @@ function ArticlesTable() {
         <TableTitle>Articles</TableTitle>
         <AddButton onClick={() => onOpenForm()}>
           <AddButtonText>Add new</AddButtonText>
-          <ArticleEditModal visible={isOpenForm} />
           <AddButtonIcon>
             <FontAwesomeIcon icon={faPlus} />
           </AddButtonIcon>

@@ -1,108 +1,42 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import {
-  Button,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Dropdown } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCog } from "@fortawesome/free-solid-svg-icons";
 
 import { logOutAction } from "actions/authActions";
 import { toggleThemeAction } from "actions/themeActions";
-
-const TopbarWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 82px;
-  background: #fff;
-  padding: 0 30px;
-`;
-
-const Search = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const SearchIcon = styled.div`
-  margin-right: 28px;
-  color: #b8b8b8;
-  font-size: 24px;
-  font-weight: 3;
-`;
-
-const SearchInput = styled.input`
-  color: #b5b5b5;
-  font-size: 18px;
-  font-weight: 300;
-  border: none;
-  outline: none;
-`;
-
-const Account = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const AccountName = styled.div`
-  margin-right: 19px;
-  font-size: 20px;
-  color: #5a5a5a;
-`;
-
-const CogButton = styled(DropdownToggle)`
-  && {
-    background: none;
-    font-size: 30px;
-    color: #d5d8db;
-    border: none;
-
-    &:hover {
-      background: none;
-      color: #d5d8db;
-    }
-
-    &:focus {
-      background: none;
-      color: #d5d8db;
-      box-shadow: none;
-    }
-
-    &:active {
-      background: none;
-    }
-  }
-`;
-
-const LogoutButton = styled(Button)`
-  && {
-    background: none;
-    border: none;
-    color: #A0A0A0;
-
-    &:hover {
-      background: none;
-      color: #D4D4D4;
-    }
-  }
-`;
-
-const ToggleTheme = styled(Button)`
-
-`;
+import { setThemeLocal } from "../../utils/theme";
+import {
+  TopbarWrap,
+  Search,
+  SearchIcon,
+  SearchInput,
+  Account,
+  AccountName,
+  CogButton,
+  DropdownWrap,
+  LogoutButton,
+  DropItem
+} from "./styles";
+import { Switch, CheckBox, CheckBoxLabel } from "components/Switch";
 
 function Topbar() {
   const dispatch = useDispatch();
-  const onLogout = () => dispatch(logOutAction());
-  const onToggleTheme = () => dispatch(toggleThemeAction());
-
+  const theme = useSelector(state => state.theme.theme);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggle = () => setDropdownOpen(prevState => !prevState);
+  const onToggleMenu = () => setDropdownOpen(prevState => !prevState);
+  const onLogout = () => dispatch(logOutAction());
+  const onToggleTheme = () => {
+    if (theme === "light") {
+      setThemeLocal("dark");
+    } else {
+      setThemeLocal("light");
+    }
+    dispatch(toggleThemeAction());
+  };
 
   return (
     <TopbarWrap>
@@ -114,18 +48,28 @@ function Topbar() {
       </Search>
       <Account>
         <AccountName>Katie Reed</AccountName>
-        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+        <Dropdown isOpen={dropdownOpen} toggle={onToggleMenu}>
           <CogButton>
             <FontAwesomeIcon icon={faCog} />
           </CogButton>
-          <DropdownMenu right>
-            <DropdownItem>
-              <LogoutButton onClick={onLogout} tag="a">Logout</LogoutButton>
-            </DropdownItem>
-            <DropdownItem>
-              <ToggleTheme onClick={onToggleTheme} tag="a">Switch theme</ToggleTheme>
-            </DropdownItem>
-          </DropdownMenu>
+          <DropdownWrap right>
+            <DropItem>
+              <LogoutButton onClick={onLogout} tag="a">
+                Logout
+              </LogoutButton>
+            </DropItem>
+            <DropItem toggle={false}>
+              <Switch>
+                <CheckBox
+                  id="checkbox"
+                  type="checkbox"
+                  checked={theme === "dark" ? true : false}
+                  onChange={onToggleTheme}
+                />
+                <CheckBoxLabel htmlFor="checkbox" />
+              </Switch>
+            </DropItem>
+          </DropdownWrap>
         </Dropdown>
       </Account>
     </TopbarWrap>

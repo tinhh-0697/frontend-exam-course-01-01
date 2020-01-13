@@ -1,17 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { ModalBody, Form, FormGroup } from "reactstrap";
+import { Input } from "components/Input";
+import { Label } from "components/Label";
 import {
-  Button,
   Modal,
   ModalHeader,
-  ModalBody,
   ModalFooter,
-  Form,
-  FormGroup,
-  Label,
-  Input
-} from "reactstrap";
+  AddButton,
+  CancelButton
+} from "./styles";
+import { Switch, CheckBox, CheckBoxLabel } from "components/Switch";
+
 import {
   addArticleAction,
   closeFormAction,
@@ -46,10 +47,11 @@ function ArticleEditModal({ visible }) {
                 type="text"
                 name="title"
                 placeholder="Enter article title"
+                autocomplete="off"
                 defaultValue={title}
                 onChange={onChangeTitle}
                 innerRef={register({
-                  required: 'Please enter article title',
+                  required: "Please enter article title",
                   minLength: {
                     value: 10,
                     message: "At least 10 characters"
@@ -58,6 +60,15 @@ function ArticleEditModal({ visible }) {
               />
               {errors.title && errors.title.message}
             </FormGroup>
+            <Switch>
+              <CheckBox
+                id="status"
+                type="checkbox"
+                checked={status}
+                onChange={onChangeStatus}
+              />
+              <CheckBoxLabel htmlFor="status" />
+            </Switch>
             <FormGroup check>
               <Label check>
                 <Input
@@ -71,12 +82,17 @@ function ArticleEditModal({ visible }) {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={key ? handleSubmit(onUpdateArticle) : handleSubmit(onAddArticle)}>
-            {key ? 'Update' : 'Add'}
-          </Button>
-          <Button color="secondary" onClick={onCloseForm}>
+          <AddButton
+            color="primary"
+            onClick={
+              key ? handleSubmit(onUpdateArticle) : handleSubmit(onAddArticle)
+            }
+          >
+            {key ? "Update" : "Add"}
+          </AddButton>
+          <CancelButton color="secondary" onClick={onCloseForm}>
             Cancel
-          </Button>
+          </CancelButton>
         </ModalFooter>
       </Modal>
     </>

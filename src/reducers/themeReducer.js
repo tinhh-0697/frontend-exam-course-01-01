@@ -12,7 +12,6 @@ const themeReducer = produce((draft, action) => {
       draft.theme = draft.theme === "light"? "dark" : "light";
       break;
     case SET_THEME:
-      console.log('action.theme: ' + action.theme)
       draft.theme = action.theme;
       break;
   }

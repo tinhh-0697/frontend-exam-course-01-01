@@ -8,30 +8,31 @@ import PrivateRoute from "./components/PrivateRoute";
 import Layout from "./components/Layout";
 import UserPage from "./container/UserPage";
 
-import { toggleThemeAction, setThemeAction } from 'actions/themeActions';
 
 import { ThemeProvider } from "styled-components";
 import lightTheme from "./themes/light";
 import darkTheme from "./themes/dark";
+import { setThemeAction } from 'actions/themeActions';
+import { getThemeLocal, setThemeLocal } from "./utils/theme";
 
 function App() {
   const dispatch = useDispatch();
   const theme = useSelector(state => state.theme.theme);
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
-  const onToggleTheme = () => dispatch(toggleThemeAction());
   const onSetTheme = (theme) => dispatch(setThemeAction(theme));
 
-
   useEffect(() => {
-    const localTheme = window.localStorage.getItem('theme');
+    const localTheme = getThemeLocal();
     if (localTheme) {
-      window.localStorage.setItem('theme', localTheme);
+      setThemeLocal(localTheme);
       onSetTheme(localTheme);
     } else {
-      // setMode('light');
+      setThemeLocal('light');
+      onSetTheme('light');
     }
-  }, [onSetTheme]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ThemeProvider theme={themeMode}>

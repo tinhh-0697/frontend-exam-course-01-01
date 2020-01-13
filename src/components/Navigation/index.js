@@ -29,12 +29,12 @@ const MenuItem = styled(NavLink).attrs({
   margin: 0;
   padding: 12px 35px;
   transition: all .4s ease-out;
-  color: #757d89;
+  color: ${props => props.theme.colors.menuText};
   font-size: 18px;
 
   &:hover {
     color: #38C6DA;
-    background-color: #eaeced;
+    background-color: ${props => props.theme.colors.line};
     text-decoration: none;
     cursor: pointer;
   }
@@ -63,7 +63,7 @@ const MenuItem = styled(NavLink).attrs({
 
   ${MenuItemIcon} {
     margin-left: 0;
-    color: #D5D8DB;
+    color: ${props => props.theme.colors.menuIcon};
   }
 `;
 
