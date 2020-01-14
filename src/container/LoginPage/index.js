@@ -14,8 +14,8 @@ import {
   enterEmailAction,
   enterPasswordAction
 } from "actions/authActions";
-import { Input, ErrorLabel } from "../../components/Input";
-import { Label } from "../../components/Label";
+import { Input, ErrorLabel } from "components/Input";
+import { Label } from "components/Label";
 
 function LoginPage() {
   const { handleSubmit, register, errors } = useForm();
@@ -49,7 +49,7 @@ function LoginPage() {
               name="email"
               id="email"
               placeholder="Enter your email"
-              autocomplete="off"
+              autoComplete="off"
               defaultValue={email}
               onChange={onEnterEmail}
               innerRef={register({

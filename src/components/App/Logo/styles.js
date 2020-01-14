@@ -1,24 +1,23 @@
-import React from "react";
 import styled from "styled-components";
 
-const LogoWrap = styled.div`
+export const LogoWrap = styled.div`
   background-color: #38c6da;
   height: 82px;
   color: #fff;
 `;
 
-const Logo = styled.h1`
-  height: 100%;
+export const Logo = styled.h1`
   display: flex;
   align-items: center;
+  height: 100%;
   margin-top: 0;
   margin-left: 35px;
 `;
 
-const ShapeLogo = styled.div`
+export const ShapeLogo = styled.div`
   position: relative;
-  height: 52px;
   width: 52px;
+  height: 52px;
   background-color: rgba(255, 255, 255, 0.14);
   border-radius: 999px;
   box-shadow: inset 0px 1px 7px 5px rgba(255, 255, 255, 0.1);
@@ -36,21 +35,8 @@ const ShapeLogo = styled.div`
   }
 `;
 
-const LogoText = styled.div`
+export const LogoText = styled.div`
   margin-left: 20px;
   font-size: 25px;
   text-transform: uppercase;
 `;
-
-function LogoC() {
-  return (
-    <LogoWrap>
-      <Logo>
-        <ShapeLogo />
-        <LogoText>Orbita</LogoText>
-      </Logo>
-    </LogoWrap>
-  );
-}
-
-export default LogoC;

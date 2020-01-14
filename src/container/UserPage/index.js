@@ -3,7 +3,7 @@ import React from 'react';
 function UserPage() {
   return (
     <>
-      UserPage
+      User Page
     </>
   )
 }

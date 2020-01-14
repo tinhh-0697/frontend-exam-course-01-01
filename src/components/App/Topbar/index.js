@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Dropdown } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faCog } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faCog, faBars } from "@fortawesome/free-solid-svg-icons";
 
 import { logOutAction } from "actions/authActions";
 import { toggleThemeAction } from "actions/themeActions";
-import { setThemeLocal } from "../../utils/theme";
+import { toggleSidebarAction } from "actions/sidebarActions";
+import { setThemeLocal } from "utils/theme";
 import {
   TopbarWrap,
   Search,
@@ -18,7 +19,8 @@ import {
   CogButton,
   DropdownWrap,
   LogoutButton,
-  DropItem
+  DropItem,
+  Burger
 } from "./styles";
 import { Switch, CheckBox, CheckBoxLabel } from "components/Switch";
 
@@ -27,6 +29,7 @@ function Topbar() {
   const theme = useSelector(state => state.theme.theme);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const onToggleSidebar = () => dispatch(toggleSidebarAction());
   const onToggleMenu = () => setDropdownOpen(prevState => !prevState);
   const onLogout = () => dispatch(logOutAction());
   const onToggleTheme = () => {
@@ -71,6 +74,9 @@ function Topbar() {
             </DropItem>
           </DropdownWrap>
         </Dropdown>
+        <Burger onClick={onToggleSidebar}>
+          <FontAwesomeIcon icon={faBars} />
+        </Burger>
       </Account>
     </TopbarWrap>
   );

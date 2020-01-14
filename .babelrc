@@ -3,7 +3,9 @@
     [
       "babel-plugin-styled-components",
       {
-        "fileName": true
+        "fileName": false,
+        "displayName": true,
+        "pure": true
       }
     ]
   ]

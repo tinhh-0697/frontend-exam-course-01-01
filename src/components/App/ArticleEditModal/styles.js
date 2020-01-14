@@ -5,6 +5,7 @@ import {
   ModalFooter as ModalFooterC,
   Button as ButtonC
 } from "reactstrap";
+import { PRIMARY_GREY } from "constants/colors";
 
 export const Modal = styled(ModalC)`
   .modal-content {
@@ -29,6 +30,10 @@ export const AddButton = styled(ButtonC)`
   && {
     background-color: ${props => props.theme.colors.second};
     border: none;
+
+    &:hover {
+      background-color: ${PRIMARY_GREY}
+    }
   }
 `;
 

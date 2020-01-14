@@ -5,7 +5,7 @@ export default {
   colors: {
     primary: "#38C6DA",
     second: "#6AD36E",
-    background: "#ECEFF4",
+    background: "#F1F3F5",
     loginFormTitle: "#555555",
     loginFormBackground: "#FFFFFF",
     loginButtomHoverBackground: "#5ed7e8",
