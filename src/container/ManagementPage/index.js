@@ -1,5 +1,5 @@
 import React from "react";
-import ArticlesTable from "components/ArticlesTable";
+import ArticlesTable from "components/App/ArticlesTable";
 
 function ManagementPage() {
   return (

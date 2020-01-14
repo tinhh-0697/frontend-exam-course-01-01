@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Button, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { devices } from "utils/devices";
+import { PRIMARY_GREY } from "constants/colors";
 
 export const TopbarWrap = styled.div`
   display: flex;
@@ -61,6 +63,7 @@ export const CogButton = styled(DropdownToggle)`
     font-size: 30px;
     color: #d5d8db;
     border: none;
+    transition: all .4s ease-out;
 
     &:hover {
       background: none;
@@ -74,7 +77,8 @@ export const CogButton = styled(DropdownToggle)`
     }
 
     &:active {
-      background: none;
+      background: none!important;
+      box-shadow: none!important;
     }
   }
 `;
@@ -87,7 +91,19 @@ export const LogoutButton = styled(Button)`
 
     &:hover {
       background: none;
-      color: #d4d4d4;
+      color: #FFFFFF;
     }
+  }
+`;
+
+export const Burger = styled.div`
+  display: none;
+  margin-left: 20px;
+  font-size: 25px;
+  color: ${PRIMARY_GREY};
+  cursor: pointer;
+
+  @media only screen and ${devices.tablet} {
+    display: block;
   }
 `;

@@ -11,15 +11,18 @@ import {
   AddButton,
   CancelButton
 } from "./styles";
-import { Switch, CheckBox, CheckBoxLabel } from "components/Switch";
-
+import {
+  Switch,
+  CheckBox,
+  CheckBoxLabel
+} from "components/Switch";
 import {
   addArticleAction,
   closeFormAction,
   enterTitleAction,
   changeStatusAction,
   updateArticleAction
-} from "../../actions/articleActions";
+} from "actions/articleActions";
 
 function ArticleEditModal({ visible }) {
   const { handleSubmit, register, errors } = useForm();
@@ -47,7 +50,7 @@ function ArticleEditModal({ visible }) {
                 type="text"
                 name="title"
                 placeholder="Enter article title"
-                autocomplete="off"
+                autoComplete="off"
                 defaultValue={title}
                 onChange={onChangeTitle}
                 innerRef={register({
@@ -69,16 +72,6 @@ function ArticleEditModal({ visible }) {
               />
               <CheckBoxLabel htmlFor="status" />
             </Switch>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="checkbox"
-                  onChange={onChangeStatus}
-                  checked={status}
-                />{" "}
-                Status
-              </Label>
-            </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>

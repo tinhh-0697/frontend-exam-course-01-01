@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route } from "react-router-dom";
+import Layout from "./components/Layout";
 import LoginPage from "./container/LoginPage";
 import ManagementPage from "./container/ManagementPage";
 import NotFound from "./container/NotFound";
-import PrivateRoute from "./components/PrivateRoute";
-import Layout from "./components/Layout";
+import PrivateRoute from "./components/App/PrivateRoute";
 import UserPage from "./container/UserPage";
 
 
