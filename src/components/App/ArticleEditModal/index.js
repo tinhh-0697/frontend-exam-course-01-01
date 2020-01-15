@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ModalBody, Form, FormGroup } from "reactstrap";
 import { Input } from "components/Input";
 import { Label } from "components/Label";
+import { ErrorLabel } from "components/ErrorLabel";
 import {
   Modal,
   ModalHeader,
@@ -61,7 +62,7 @@ function ArticleEditModal({ visible }) {
                   }
                 })}
               />
-              {errors.title && errors.title.message}
+              {errors.title && <ErrorLabel>{errors.title.message}</ErrorLabel>}
             </FormGroup>
             <Switch>
               <CheckBox

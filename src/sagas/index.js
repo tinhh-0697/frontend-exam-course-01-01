@@ -61,7 +61,7 @@ function* handleLogout() {
 function* handleGetArticles() {
   try {
     const result = yield call(() => getArticles());
-    yield put(getArticlesSuccessAction(result));
+    yield put(getArticlesSuccessAction(result || {}));
   } catch (error) {
     put(getArticlesErrorAction("Loi he thong"));
   }

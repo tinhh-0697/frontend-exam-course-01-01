@@ -123,6 +123,7 @@ export const DeleteButton = styled(EditButton)`
 `;
 
 export const ResultTable = styled.div`
-  margin: 0 auto;
+  padding: 20px 0;
   color: ${PRIMARY_WHITE};
+  text-align: center;
 `;

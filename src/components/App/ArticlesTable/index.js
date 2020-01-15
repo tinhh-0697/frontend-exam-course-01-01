@@ -72,13 +72,12 @@ function ArticlesTable() {
             </tr>
           );
       });
-    } else {
-      return <ResultTable>No data</ResultTable>
     }
   }
 
   function renderTable() {
     return (
+      <>
       <CustomeTable responsive>
         <thead>
           <tr>
@@ -91,8 +90,11 @@ function ArticlesTable() {
         </thead>
         <tbody>{renderArticles(articles)}</tbody>
       </CustomeTable>
+      { Object.keys(articles).length === 0 && <ResultTable>No data</ResultTable>}
+      </>
     );
   }
+  console.log('articles: ' + articles)
   return (
     <TableWrap>
       <TableHead>
