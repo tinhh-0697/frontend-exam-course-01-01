@@ -8,13 +8,24 @@ export const TopbarWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 82px;
-  background: ${props => props.theme.colors.contentBackground};
   padding: 0 30px;
+  background: ${props => props.theme.colors.contentBackground};
+
+  @media only screen and ${devices.smallphone} {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 20px 30px;
+  }
 `;
 
 export const Search = styled.div`
   display: flex;
   align-items: center;
+
+  @media only screen and ${devices.smallphone} {
+    width: 100%;
+    justify-content: stretch;
+  }
 `;
 
 export const SearchIcon = styled.div`
@@ -26,21 +37,27 @@ export const SearchIcon = styled.div`
 
 export const SearchInput = styled.input`
   color: #b5b5b5;
+  background: none;
+  border: none;
   font-size: 18px;
   font-weight: 300;
-  border: none;
   outline: none;
 `;
 
 export const Account = styled.div`
   display: flex;
   align-items: center;
+
+  @media only screen and ${devices.smallphone} {
+    width: 100%;
+    justify-content: space-between;
+  }
 `;
 
 export const AccountName = styled.div`
   margin-right: 19px;
-  font-size: 20px;
   color: #5a5a5a;
+  font-size: 20px;
 `;
 
 export const DropdownWrap = styled(DropdownMenu)`
@@ -59,20 +76,20 @@ export const DropItem = styled(DropdownItem)`
 
 export const CogButton = styled(DropdownToggle)`
   && {
-    background: none;
-    font-size: 30px;
     color: #d5d8db;
+    background: none;
     border: none;
+    font-size: 30px;
     transition: all .4s ease-out;
 
     &:hover {
-      background: none;
       color: #d5d8db;
+      background: none;
     }
 
     &:focus {
-      background: none;
       color: #d5d8db;
+      background: none;
       box-shadow: none;
     }
 
@@ -85,13 +102,13 @@ export const CogButton = styled(DropdownToggle)`
 
 export const LogoutButton = styled(Button)`
   && {
+    color: #a0a0a0;
     background: none;
     border: none;
-    color: #a0a0a0;
 
     &:hover {
-      background: none;
       color: #FFFFFF;
+      background: none;
     }
   }
 `;
@@ -99,8 +116,8 @@ export const LogoutButton = styled(Button)`
 export const Burger = styled.div`
   display: none;
   margin-left: 20px;
-  font-size: 25px;
   color: ${PRIMARY_GREY};
+  font-size: 25px;
   cursor: pointer;
 
   @media only screen and ${devices.tablet} {

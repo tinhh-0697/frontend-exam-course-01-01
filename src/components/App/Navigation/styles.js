@@ -25,9 +25,9 @@ export const MenuItem = styled(NavLink).attrs({
   align-items: center;
   margin: 0;
   padding: 12px 35px;
-  transition: all 0.4s ease-out;
   color: ${props => props.theme.colors.menuText};
   font-size: 18px;
+  transition: all 0.4s ease-out;
 
   &:hover {
     color: #38c6da;
@@ -37,11 +37,11 @@ export const MenuItem = styled(NavLink).attrs({
   }
 
   &:before {
-    position: absolute;
     content: "";
+    position: absolute;
+    left: 0;
     width: 4px;
     height: 0;
-    left: 0;
     background-color: #38c6da;
   }
 
@@ -64,6 +64,10 @@ export const MenuItem = styled(NavLink).attrs({
 
   @media only screen and ${devices.desktop} {
     padding: 12px 25px;
+  }
+
+  @media only screen and ${devices.smallphone} {
+    padding: 5px 20px;
   }
 `;
 

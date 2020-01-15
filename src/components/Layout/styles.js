@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { Container as ContainerC } from "reactstrap";
-import { devices } from "../../utils/devices";
+import { devices } from "utils/devices";
 
 export const Wrapper = styled.div`
   background-color: ${props => props.theme.colors.background};
 `;
 
 export const Container = styled(ContainerC)`
-  display: block;
-  height: 100vh;
+  position: relative;
+  display: flex;
+  overflow: hidden;
 
   @media only screen and ${devices.tablet} {
     && {
@@ -19,7 +20,8 @@ export const Container = styled(ContainerC)`
 
 export const Main = styled.div`
   width: calc(100% - 350px);
-  float: right;
+  height: 100vh;
+  overflow-y: auto;
 
   @media only screen and ${devices.desktop} {
     width: calc(100% - 250px);
@@ -31,7 +33,7 @@ export const Main = styled.div`
 `;
 
 export const Content = styled.div`
-  margin: 30px;
+  margin:30px;
 
   @media only screen and ${devices.tablet} {
     margin: 10px;

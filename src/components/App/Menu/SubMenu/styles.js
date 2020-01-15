@@ -7,10 +7,10 @@ export const SubMenuWrap = styled.div`
 export const SubMenuText = styled.div`
   width: 100%;
   padding: 0 35px 21px;
-  font-size: 18px;
-  font-family:   Rubik;
   color: #bcbfc4;
   border-bottom: 1px solid ${props => props.theme.colors.line};
+  font-size: 18px;
+  font-family:   Rubik;
   text-transform: uppercase;
 `;
 

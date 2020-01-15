@@ -9,7 +9,7 @@ export default {
     loginFormTitle: "#FFFFFF",
     loginFormBackground: "#1D1E22",
     loginButtomHoverBackground: "#5ed7e8",
-    contentBackground: "rgba(255,255,255,0.01)",
+    contentBackground: "#1E2125",
     sidebarText: "#9398A2",
     rowTableBackground: "#1D1E22",
     menuIcon: "#494C53",

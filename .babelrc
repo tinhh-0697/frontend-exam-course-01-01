@@ -4,8 +4,7 @@
       "babel-plugin-styled-components",
       {
         "fileName": false,
-        "displayName": true,
-        "pure": true
+        "displayName": true
       }
     ]
   ]

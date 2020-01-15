@@ -3,12 +3,7 @@ import Topbar from "components/App/Topbar";
 import Sidebar from "components/App/Sidebar";
 import { useSelector } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader";
-import {
-  Wrapper,
-  Container,
-  Main,
-  Content
-} from './styles';
+import { Wrapper, Container, Main, Content } from "./styles";
 
 function Layout({ children }) {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);

@@ -15,7 +15,7 @@ import {
   ADD_ARTICLE,
   DELETE_ARTICLE,
   UPDATE_ARTICLE,
-} from "../constants/types";
+} from "constants/types";
 import { loginErrorAction, logOutSuccessAction } from "actions/authActions";
 import {
   getArticlesSuccessAction,
@@ -26,7 +26,7 @@ import {
   deleteArticleErrorAction,
   updateArticleSuccessAction,
   updateArticleErrorAction
-} from "../actions/articleActions";
+} from "actions/articleActions";
 
 function* handleLogin(payload) {
   const { email, password } = payload.user;

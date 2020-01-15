@@ -1,6 +1,6 @@
 export const PRIMARY_GREEN = '#6AD36E';
 export const PRIMARY_RED = '#FB5867';
-export const PRIMARY_BLUE_DARK = '#0029ab';
+export const PRIMARY_WHITE = '#FFFFFF';
 export const PRIMARY_BLUE_LIGHT = '#15a0dd';
 export const SECONDARY_BLUE_LIGHT = '#0098db';
 export const BORDER_GREY_LIGHT = 'rgba(0,0,0,0.12)';

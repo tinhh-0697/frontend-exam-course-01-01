@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { devices } from "utils/devices";
 import { Table, Button } from "reactstrap";
-import { PRIMARY_GREEN, PRIMARY_RED } from "constants/colors";
+import { PRIMARY_GREEN, PRIMARY_RED, PRIMARY_WHITE } from "constants/colors";
 
 export const AddButton = styled(Button)`
   && {
@@ -10,6 +11,11 @@ export const AddButton = styled(Button)`
     height: 51px;
     background: #38c6da;
     border: none;
+
+    @media only screen and ${devices.tablet} {
+      width: auto;
+      height: auto;
+    }
   }
 `;
 
@@ -25,6 +31,10 @@ export const TableHead = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 45px 20px 36px;
+
+  @media only screen and ${devices.tablet} {
+    padding: 20px 30px;
+  }
 `;
 
 export const TableTitle = styled.h4`
@@ -42,7 +52,7 @@ export const TableWrap = styled.div`
 
 export const CustomeTable = styled(Table)`
   && {
-    table-layout: fixed;
+    min-width: 900px;
 
     thead > tr {
       border-bottom: 1px solid ${props => props.theme.colors.line};
@@ -60,9 +70,8 @@ export const CustomeTable = styled(Table)`
       border: none;
       font-size: 17px;
 
-      &:first-child {
-        width: 1px;
-        white-space: nowrap;
+      &:nth-child(4) {
+        text-align: center;
       }
     }
 
@@ -73,7 +82,7 @@ export const CustomeTable = styled(Table)`
       vertical-align: middle;
 
       &:nth-child(2) {
-        width: 40%;
+        width: 99%;
         color: ${props => props.theme.colors.articleName};
       }
 
@@ -83,6 +92,14 @@ export const CustomeTable = styled(Table)`
 
       &:nth-child(4) {
         text-align: center;
+      }
+
+      &:nth-child(5) {
+        display: flex;
+      }
+
+      @media only screen and ${devices.tablet} {
+        padding: 10px 19px;
       }
     }
   }
@@ -103,4 +120,9 @@ export const DeleteButton = styled(EditButton)`
     background-color: ${PRIMARY_RED};
     margin-left: 11px;
   }
+`;
+
+export const ResultTable = styled.div`
+  margin: 0 auto;
+  color: ${PRIMARY_WHITE};
 `;

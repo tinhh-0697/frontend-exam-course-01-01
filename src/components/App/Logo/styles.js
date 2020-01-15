@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const LogoWrap = styled.div`
-  background-color: #38c6da;
   height: 82px;
   color: #fff;
+  background-color: #38c6da;
 `;
 
 export const Logo = styled.h1`

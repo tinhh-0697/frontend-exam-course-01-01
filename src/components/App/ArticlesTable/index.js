@@ -12,7 +12,8 @@ import {
   AddButtonText,
   AddButtonIcon,
   TableContent,
-  CustomeTable
+  CustomeTable,
+  ResultTable
 } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -21,8 +22,8 @@ import { openFormAction, deleteArticleAction } from "actions/articleActions";
 import ArticleEditModal from "../ArticleEditModal";
 
 function truncate(title) {
-  if (title.length > 50) {
-    let truncated = title.substring(0, 45);
+  if (title.length > 80) {
+    let truncated = title.substring(0, 65);
     truncated =
       truncated.substring(
         0,
@@ -35,9 +36,9 @@ function truncate(title) {
 
 function ArticlesTable() {
   const dispatch = useDispatch();
-  const onOpenForm = (key) => dispatch(openFormAction(key));
+  const onOpenForm = key => dispatch(openFormAction(key));
   const onGetArticles = () => dispatch(getArticlesAction());
-  const onDeleteArticle = (key) => dispatch(deleteArticleAction(key));
+  const onDeleteArticle = key => dispatch(deleteArticleAction(key));
 
   const articles = useSelector(state => state.articles.data);
   const isOpenForm = useSelector(state => state.articles.isOpenForm);
@@ -54,7 +55,7 @@ function ArticlesTable() {
           return (
             <tr key={key}>
               <td>{no++}</td>
-              <td>{truncate(article.title)}</td>
+              <td nowrap>{truncate(article.title)}</td>
               <td>2,567</td>
               <td>
                 <FontAwesomeIcon
@@ -64,14 +65,34 @@ function ArticlesTable() {
               </td>
               <td>
                 <EditButton onClick={() => onOpenForm(key)}>Edit</EditButton>
-                <DeleteButton onClick={() => onDeleteArticle(key)}>Delete</DeleteButton>
+                <DeleteButton onClick={() => onDeleteArticle(key)}>
+                  Delete
+                </DeleteButton>
               </td>
             </tr>
           );
       });
+    } else {
+      return <ResultTable>No data</ResultTable>
     }
   }
 
+  function renderTable() {
+    return (
+      <CustomeTable responsive>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Views</th>
+            <th>Status</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>{renderArticles(articles)}</tbody>
+      </CustomeTable>
+    );
+  }
   return (
     <TableWrap>
       <TableHead>
@@ -83,20 +104,7 @@ function ArticlesTable() {
           </AddButtonIcon>
         </AddButton>
       </TableHead>
-      <TableContent>
-        <CustomeTable responsive>
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Name</th>
-              <th>Views</th>
-              <th>Status</th>
-              <th>Options</th>
-            </tr>
-          </thead>
-          <tbody>{renderArticles(articles)}</tbody>
-        </CustomeTable>
-      </TableContent>
+      <TableContent>{renderTable()}</TableContent>
       <ArticleEditModal visible={isOpenForm} />
     </TableWrap>
   );

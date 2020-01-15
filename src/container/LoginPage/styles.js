@@ -29,8 +29,8 @@ export const LogginButton = styled(Button)`
     padding: 0 20px;
     border: none;
 
-    &:hover {
-      background-color: ${props => props.theme.colors.loginButtomHoverBackground};
+    &:hover, &:active, &:focus {
+      background-color: ${props => props.theme.colors.loginButtomHoverBackground}!important;
     }
   }
 `;

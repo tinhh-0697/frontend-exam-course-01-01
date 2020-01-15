@@ -1,5 +1,4 @@
 import produce from "immer";
-// import { GET_ARTICLES } from "constants/types";
 import {
   GET_ARTICLES,
   GET_ARTICLES_SUCCESS,
@@ -51,8 +50,8 @@ const articlesReducer = produce((draft, action) => {
       draft.isOpenForm = true;
       break;
     case CLOSE_FORM:
-      draft.article = initialState.article;
       draft.isOpenForm = false;
+      draft.article = initialState.article;
       break;
     case ENTER_TITLE:
       draft.article.title = action.title;
