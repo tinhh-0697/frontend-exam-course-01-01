@@ -55,7 +55,7 @@ function ArticlesTable() {
           return (
             <tr key={key}>
               <td>{no++}</td>
-              <td nowrap>{truncate(article.title)}</td>
+              <td>{truncate(article.title)}</td>
               <td>2,567</td>
               <td>
                 <FontAwesomeIcon
@@ -94,7 +94,7 @@ function ArticlesTable() {
       </>
     );
   }
-  console.log('articles: ' + articles)
+
   return (
     <TableWrap>
       <TableHead>

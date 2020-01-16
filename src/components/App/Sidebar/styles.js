@@ -4,6 +4,7 @@ import { devices } from "utils/devices";
 export const SidebarWrap = styled.div`
   width: 350px;
   background: ${props => props.theme.colors.contentBackground};
+  overflow: hidden;
 
   @media only screen and ${devices.desktop} {
     width: 250px;

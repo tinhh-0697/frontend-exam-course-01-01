@@ -1,6 +1,11 @@
 /**
  * Light mode color
  */
+
+import {
+  PRIMARY_DARK
+} from "constants/colors";
+
 export default {
   colors: {
     primary: "#38C6DA",
@@ -22,12 +27,9 @@ export default {
     tableHead: "#5D5D5D",
     dropDownBackground: "#FFFFF",
     itemHover: "#D5D8DB",
+    inputColor: PRIMARY_DARK,
     inputBackground: "#FFFFFF",
     modalBackground: "#FFFFFF",
     modalTitle: "#1E2125",
   },
-  fonts: [],
-  fontSizes: {
-
-  }
 };

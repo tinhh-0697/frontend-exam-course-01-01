@@ -15,7 +15,8 @@ import {
 import {
   Switch,
   CheckBox,
-  CheckBoxLabel
+  CheckBoxLabel,
+  CheckBoxSpan
 } from "components/Switch";
 import {
   addArticleAction,
@@ -71,7 +72,9 @@ function ArticleEditModal({ visible }) {
                 checked={status}
                 onChange={onChangeStatus}
               />
-              <CheckBoxLabel htmlFor="status" />
+              <CheckBoxLabel htmlFor="status">
+                <CheckBoxSpan>{status ? "Public" : "Private"}</CheckBoxSpan>
+              </CheckBoxLabel>
             </Switch>
           </Form>
         </ModalBody>

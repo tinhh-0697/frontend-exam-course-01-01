@@ -22,11 +22,17 @@ import {
   DropItem,
   Burger
 } from "./styles";
-import { Switch, CheckBox, CheckBoxLabel } from "components/Switch";
+import {
+  Switch,
+  CheckBox,
+  CheckBoxLabel,
+  CheckBoxSpan
+} from "components/Switch";
 
 function Topbar() {
   const dispatch = useDispatch();
   const theme = useSelector(state => state.theme.theme);
+  const user = useSelector(state => state.auth.user);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const onToggleSidebar = () => dispatch(toggleSidebarAction());
@@ -50,7 +56,7 @@ function Topbar() {
         <SearchInput placeholder="Search now ..." />
       </Search>
       <Account>
-        <AccountName>Katie Reed</AccountName>
+        <AccountName>{user.name}</AccountName>
         <Dropdown isOpen={dropdownOpen} toggle={onToggleMenu}>
           <CogButton>
             <FontAwesomeIcon icon={faCog} />
@@ -69,7 +75,9 @@ function Topbar() {
                   checked={theme === "dark" ? true : false}
                   onChange={onToggleTheme}
                 />
-                <CheckBoxLabel htmlFor="checkbox" />
+                <CheckBoxLabel htmlFor="checkbox">
+                  <CheckBoxSpan>{theme === "dark" ? "dark" : "light"}</CheckBoxSpan>
+                </CheckBoxLabel>
               </Switch>
             </DropItem>
           </DropdownWrap>

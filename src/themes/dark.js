@@ -1,6 +1,11 @@
 /**
  * Light mode color
  */
+
+import {
+  PRIMARY_WHITE
+} from "constants/colors";
+
 export default {
   colors: {
     primary: "#38C6DA",
@@ -22,6 +27,7 @@ export default {
     tableHead: "#9A9A9A",
     dropDownBackground: "#1E2125",
     itemHover: "#282B2E",
+    inputColor: PRIMARY_WHITE,
     inputBackground: "#1E2125",
     modalBackground: "#1E2125",
     modalTitle: "#A0A0A0",

@@ -16,7 +16,8 @@ const initialState = {
   loading: false,
   error: "",
   email: "",
-  password: ""
+  password: "",
+  user: ""
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -33,9 +34,10 @@ const authReducer = produce((draft, action) => {
       draft.loading = true;
       break;
     case LOGIN_SUCCESS:
-      draft.email = '';
-      draft.password = '';
+      draft.email = "";
+      draft.password = "";
       draft.loading = false;
+      draft.user = action.user;
       draft.isAuthenticated = true;
       break;
     case LOGIN_ERROR:

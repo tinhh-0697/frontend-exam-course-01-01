@@ -4,12 +4,12 @@ import { devices } from "utils/devices";
 import { Badge } from "reactstrap";
 
 export const Menu = styled.div`
+  width: 100%;
   height: calc(100vh - 82px);
-  overflow: auto;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  overflow-y: scroll;
+  padding-right: 17px;
+  box-sizing: content-box;
 `;
 
 export const MenuItemIcon = styled.div`

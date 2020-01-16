@@ -1,33 +1,35 @@
 import React from "react";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom";
-import App from "./App";
 import { ConnectedRouter } from "connected-react-router";
+import { push } from "connected-react-router";
+import App from "./App";
 import configureStore, { history } from "./configureStore";
-import "./index.css";
-import "bootstrap/dist/css/bootstrap.css";
-// import 'sanitize.css';
-// import 'sanitize.css/forms.css';
-// import 'sanitize.css/typography.css';
-
 import auth from "./firebase";
 import { loginSuccessAction, logOutSuccessAction } from "./actions/authActions";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 const initialState = {};
 export const store = configureStore(initialState);
 
 auth.onAuthStateChanged(user => {
   if (user) {
-    store.dispatch(loginSuccessAction());
+    const userData = {
+      uid: user.uid,
+      name: user.displayName
+    };
+    store.dispatch(loginSuccessAction(userData));
   } else {
     store.dispatch(logOutSuccessAction());
+    store.dispatch(push("/login"));
   }
 });
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-        <App />
+      <App />
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")

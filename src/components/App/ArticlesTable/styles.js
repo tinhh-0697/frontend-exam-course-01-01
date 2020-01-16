@@ -7,14 +7,16 @@ export const AddButton = styled(Button)`
   && {
     display: flex;
     justify-content: center;
-    width: 157px;
-    height: 51px;
+    padding: 13px 24px 13px 30px;
     background: #38c6da;
     border: none;
+    font-size: 18px;
 
     @media only screen and ${devices.tablet} {
       width: auto;
       height: auto;
+      padding: 5px 20px;
+      font-size: 15px;
     }
   }
 `;

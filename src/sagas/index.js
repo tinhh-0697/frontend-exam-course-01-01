@@ -15,8 +15,13 @@ import {
   ADD_ARTICLE,
   DELETE_ARTICLE,
   UPDATE_ARTICLE,
+  IS_LOGGED
 } from "constants/types";
-import { loginErrorAction, logOutSuccessAction } from "actions/authActions";
+import {
+  loginErrorAction,
+  loginSuccessAction,
+  logOutSuccessAction,
+} from "actions/authActions";
 import {
   getArticlesSuccessAction,
   getArticlesErrorAction,
@@ -25,7 +30,7 @@ import {
   deleteArticleSuccessAction,
   deleteArticleErrorAction,
   updateArticleSuccessAction,
-  updateArticleErrorAction
+  updateArticleErrorAction,
 } from "actions/articleActions";
 
 function* handleLogin(payload) {
@@ -33,9 +38,14 @@ function* handleLogin(payload) {
 
   try {
     const response = yield doSignInWithEmailAndPassword(email, password);
-    const userData = {
-      uid: response.user.uid,
-      name: response.user.displayName || "Hello Bro"
+
+    if (response) {
+      const userData = {
+        uid: response.user.uid,
+        name: response.user.displayName || "Hello Bro"
+      }
+
+      yield put(loginSuccessAction(userData));
     }
   } catch (error) {
     if (error.code === "auth/wrong-password")
@@ -115,6 +125,10 @@ function* handleUpdateArticle() {
   }
 }
 
+function* handleIsLogged() {
+
+}
+
 // All export
 export default function* rootSaga() {
   yield all([takeLatest(LOGIN, handleLogin)]);
@@ -123,4 +137,5 @@ export default function* rootSaga() {
   yield all([takeLatest(ADD_ARTICLE, handleAddArticle)]);
   yield all([takeLatest(DELETE_ARTICLE, handleDeleteArticle)]);
   yield all([takeLatest(UPDATE_ARTICLE, handleUpdateArticle)]);
+  yield all([takeLatest(IS_LOGGED, handleIsLogged)]);
 }

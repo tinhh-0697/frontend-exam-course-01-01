@@ -25,9 +25,10 @@ export const loginAction = (user) => {
   };
 };
 
-export const loginSuccessAction = () => {
+export const loginSuccessAction = (user) => {
   return {
-    type: LOGIN_SUCCESS
+    type: LOGIN_SUCCESS,
+    user
   };
 };
 
